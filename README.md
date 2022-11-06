@@ -25,7 +25,7 @@ WordPress を利用されている場合は
 
 エックスサーバーの場合
 
-```bash
+```text
 +---anthill
 |   |
 |   |   main.php
@@ -51,7 +51,7 @@ WordPress を利用されている場合は
 
 以下のようになります。
 
-```bash
+```text
 +---anthill
 |   |
 |   |    main.php
@@ -116,8 +116,27 @@ Webブラウザを `https://ドメイン名/form.php?action=admin` で開くと�
 そのリンクをクリックすると受け付けた申し込みの一覧が表示されます。一覧は申し込みの順です。
 この一覧をマウスで選択してコピーし、 Excel などに貼り付けることができます。
 
-## その他
+## B.5. その他
 
 このツールは [MIT ライセンス](LICENSE) で配布します。
 
 設置やカスタマイズを希望される場合はご連絡ください。
+
+## C. 開発
+
+PHP は 7.4 以降を使用してください。
+
+```bash
+$ php --version
+PHP 8.1.10 (cli) ... ... ...
+
+$ git clone git@github.com:MichinobuMaeda/anthill.git
+$ cd anthill
+$ cp anthill/database.sqlite3.seed anthill/database.sqlite3
+$ cp anthill/event00.php anthill/event01.php
+$ php -S localhost:8080 -t public_html
+```
+
+フォームの表示 <http://localhost:8080/form.php?event=event01>
+
+管理者メニュー <http://localhost:8080/form.php?action=admin>
