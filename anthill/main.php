@@ -1,16 +1,16 @@
 <?php
-// JSA 申し込み受付フォーム
-// 
+// イベント申し込み受付フォーム
+//
 // 設定ファイル
 //   [イベントID].php
 // データファイル
 //   database.sqlite3 ( SQLite 3 形式 )
 // 入力フォームのURL
-//   https://jsa.gr.jp/05event/form.php?event=[イベントID]
+//   https://example.com/form.php?event=[イベントID]
 // 管理者ログインのURL
-//   https://jsa.gr.jp/05event/form.php?action=login
+//   https://example.com/form.php?action=login
 //
-// [イベントID] の例: 24sogaku -- 第24回総合学術研究集会
+// イベントIDは半角英数字としてください。
 
 require_once('views/form_view.php');
 require_once('views/form_prepared_view.php');
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             header('Location: ' . $base_url . '?action=login');
         } elseif ($action == 'admin') {
             show_admin($title, $base_url);
-            
+
         // The privilege of given event is required.
         } elseif (!in_array($event, getPrivs($_SESSION['email']))) {
             header('Location: ' . $base_url . '?action=admin');
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } elseif ($action == 'change_password') {
             change_password($secret);
             header('Location: ' . $base_url . '?action=admin');
-            
+
         // The privilege of given event is required.
         } elseif ($event && !in_array($event, getPrivs($_SESSION['email']))) {
             header("HTTP/1.1 403 Forbidden");

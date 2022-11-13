@@ -33,7 +33,7 @@ function login($secret) {
         $res = $stmt->fetch();
 
         if ($res) {
-            $_SESSION['email'] = $_POST['email']; 
+            $_SESSION['email'] = $_POST['email'];
             add_col_deleted_at($dbh);
             return true;
 
@@ -84,10 +84,10 @@ EOF);
       	hash('sha256', $password . $secret),
       	preg_replace('/\s/', '', $_POST['priv']),
     ));
-    
+
     // 本人にメールで通知する。
     $message = [
-      	'JSAイベント参加受付システムの管理者アカウントを作成しました。',
+      	'イベント参加受付システムの管理者アカウントを作成しました。',
       	$base_url . '?action=login',
       	'からログインしてください。',
       	'パスワードは',
@@ -97,7 +97,7 @@ EOF);
 
     mb_send_mail(
       	$_POST['email'],
-      	'JSAイベント参加受付システム 管理者アカウント作成',
+      	'イベント参加受付システム 管理者アカウント作成',
       	implode("\n", $message),
       	['From' => $from],
     );
@@ -111,10 +111,10 @@ function reset_password($base_url, $secret, $from) {
         hash('sha256', $password . $secret),
         $_POST['email'],
     ));
-    
+
     // 本人にメールで通知する。
     $message = [
-        'JSAイベント参加受付システムのパスワードを再設定しました。',
+        'イベント参加受付システムのパスワードを再設定しました。',
         $base_url . '?action=login',
         'からログインしてください。',
         'パスワードは',
@@ -124,7 +124,7 @@ function reset_password($base_url, $secret, $from) {
 
     mb_send_mail(
         $_POST['email'],
-        'JSAイベント参加受付システム パスワード再設定',
+        'イベント参加受付システム パスワード再設定',
         implode("\n", $message),
         ['From' => $from],
     );
@@ -142,7 +142,7 @@ function change_password($secret) {
 	if (!$res) {
 	  	throw new Exception('Invalid password.');
 	}
-	
+
 	$stmt = $dbh->prepare("UPDATE accounts SET password = ? WHERE email = ?");
 	$stmt->execute(array(
 	  	hash('sha256', $_POST['password'] . $secret),
